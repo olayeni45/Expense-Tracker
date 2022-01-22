@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { INITIAL_EXPENSES } from "./static";
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 
 const App = () => {
+  const [expenses, setExpenses] = useState(INITIAL_EXPENSES);
+
   const addExpense = (expense) => {
-    console.log("IN APP.JS");
-    console.log(expense);
+    setExpenses((prev) => {
+      return [expense, ...prev];
+    });
   };
 
   return (
     <div>
       <NewExpense onAddExpense={addExpense} />
-      <Expenses expenseArray={INITIAL_EXPENSES} />
+      <Expenses expenseArray={expenses} />
     </div>
   );
 };
